@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'master', url: 'https://github.com/aihoon01/JavaILLab4.git'
+                git branch: 'main', url: 'https://github.com/your-repo-url.git'
             }
         }
         stage('Build') {
