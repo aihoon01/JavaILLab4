@@ -9,58 +9,23 @@ pipeline {
         }
         stage('Build') {
             steps {
-                bat 'mvnw.cmd clean compile'
+                dir('TestingFrameworks') {
+                    bat 'mvnw.cmd clean compile'
+                }
             }
         }
-        stage('Test') {pipeline {
-                           agent any
-
-                           stages {
-                               stage('Clone Repository') {
-                                   steps {
-                                       git branch: 'main', url: 'https://github.com/aihoon01/JavaILLab4.git'
-                                   }
-                               }
-                               stage('Build') {
-                                   steps {
-                                       dir('TestingFrameworks') {
-                                           bat 'mvnw.cmd clean compile'
-                                       }
-                                   }
-                               }
-                               stage('Test') {
-                                   steps {
-                                       dir('TestingFrameworks') {
-                                           bat 'mvnw.cmd test'
-                                       }
-                                   }
-                               }
-                               stage('Package') {
-                                   steps {
-                                       dir('TestingFrameworks') {
-                                           bat 'mvnw.cmd package'
-                                       }
-                                   }
-                               }
-                           }
-
-                           post {
-                               success {
-                                   echo 'Build, Test, and Packaging were successful!'
-                               }
-                               failure {
-                                   echo 'Build failed.'
-                               }
-                           }
-                       }
-
+        stage('Test') {
             steps {
-                bat 'mvnw.cmd test'
+                dir('TestingFrameworks') {
+                    bat 'mvnw.cmd test'
+                }
             }
         }
         stage('Package') {
             steps {
-                bat 'mvnw.cmd package'
+                dir('TestingFrameworks') {
+                    bat 'mvnw.cmd package'
+                }
             }
         }
     }
