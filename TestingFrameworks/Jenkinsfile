@@ -9,17 +9,17 @@ pipeline {
         }
         stage('Build') {
             steps {
-                bat './mvnw clean compile'
+                bat 'mvnw.cmd clean compile'
             }
         }
         stage('Test') {
             steps {
-                bat './mvnw test'
+                bat 'mvnw.cmd test'
             }
         }
         stage('Package') {
             steps {
-                bat './mvnw package'
+                bat 'mvnw.cmd package'
             }
         }
     }
